@@ -1,6 +1,6 @@
 # InstanceStorage
 
-TODO: Write a gem description
+クラスにincludeすると、クラスインスタンスごとにSymbolを割り振って、あとからその名前でインスタンスにアクセスする機能を提供します。
 
 ## Installation
 
@@ -20,11 +20,20 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+class Tag
+  include InstanceStorage
+end
+
+foo = Tag[:foo]  # generate instance `foo'
+foo.name         # => :foo
+foo == Tag[:foo] # => true
+foo == Tag[:bar] # => false
+```
 
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/instance_storage/fork )
+1. Fork it ( https://github.com/toshia/instance_storage/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
