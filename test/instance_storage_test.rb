@@ -46,4 +46,12 @@ describe(InstanceStorage) do
     assert_equal(klass[:a], klass.instance(:a))
   end
 
+  it "should support inherited class" do
+    klass = Class.new do
+      include InstanceStorage end
+    child = Class.new(klass)
+    assert_same(child[:foo], child[:foo])
+    refute_same(child[:foo], klass[:foo])
+  end
+
 end
