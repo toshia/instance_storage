@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["toshi.alternative@gmail.com"]
   spec.summary       = %q{Manage class instances with dictionary}
   spec.description   = %q{Manage class instances with dictionary.}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/toshia/instance_storage"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
