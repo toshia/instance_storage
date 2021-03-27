@@ -5,23 +5,22 @@ require 'minitest/autorun'
 
 require 'instance_storage'
 
-describe(InstanceStorage) do
-
-  it 'get and create instance' do
+class InstanceStorageTest < MiniTest::Unit::TestCase
+  def test_get_and_create_instance
     klass = Class.new do
       include InstanceStorage end
     assert_same(klass[:foo], klass[:foo])
     refute_same(klass[:foo], klass[:bar])
   end
 
-  it "get all instances" do
+  def test_get_all_instances
     klass = Class.new do
       include InstanceStorage end
     assert_equal([], klass.instances)
     assert_equal([klass[:a], klass[:b]], klass.instances)
   end
 
-  it "get all instances name" do
+  def test_get_all_instances_name
     klass = Class.new do
       include InstanceStorage end
     assert_equal([], klass.instances_name)
@@ -30,7 +29,7 @@ describe(InstanceStorage) do
     assert_equal([:a, :b], klass.instances_name)
   end
 
-  it "destroy instance" do
+  def test_destroy_instance
     klass = Class.new do
       include InstanceStorage end
     klass[:a]
@@ -39,14 +38,14 @@ describe(InstanceStorage) do
     assert(! klass.instance_exist?(:a))
   end
 
-  it "get existing instance" do
+  def test_get_existing_instance
     klass = Class.new do
       include InstanceStorage end
     assert_nil(klass.instance(:a))
     assert_equal(klass[:a], klass.instance(:a))
   end
 
-  it "should support inherited class" do
+  def test_should_support_inherited_class
     klass = Class.new do
       include InstanceStorage end
     child = Class.new(klass)

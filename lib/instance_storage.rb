@@ -18,7 +18,7 @@ module InstanceStorage
   end
 
   def initialize(name)
-    @name = name end
+    @name = name.to_sym end
 
   # 名前を文字列にして返す
   # ==== Return
@@ -35,7 +35,9 @@ module InstanceStorage
 
     # 定義されているインスタンスを全て削除する
     def clear!
-      @instances = @storage_lock = nil end
+      @instances = nil
+      self
+    end
 
     # インスタンス _event_name_ を返す。既に有る場合はそのインスタンス、ない場合は新しく作って返す。
     # ==== Args
@@ -82,6 +84,8 @@ module InstanceStorage
       instances_dict[name.to_sym] end
 
     def destroy(name)
-      instances_dict.delete(name.to_sym) end
+      instances_dict.delete(name.to_sym)
+      self
+    end
   end
 end
