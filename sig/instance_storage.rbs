@@ -1,0 +1,29 @@
+# TypeProf 0.13.0
+
+# Classes
+module InstanceStorage
+  VERSION: String
+  extend InstanceStorageExtend
+
+  attr_reader name: Symbol
+  alias to_sym name
+  def self.included: (Class) -> void
+  def initialize: (Symbol|String) -> void
+  def to_s: -> String
+
+  module InstanceStorageExtend
+    @instances: Hash[Symbol, self]?
+    @storage_lock: Thread::Mutex?
+
+    def instances_dict: -> Hash[Symbol, self]
+    def storage_lock: -> Thread::Mutex
+    def clear!: -> self
+    def []: (Symbol|String) -> self
+    def instances: -> Array[self]
+    def instances_name: -> Array[Symbol]
+    def instance_exist?: (Symbol|String) -> bool
+    def instance: (Symbol|String) -> self
+    def destroy: (Symbol|String) -> self
+    def new: (Symbol|String) -> self
+  end
+end
